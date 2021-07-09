@@ -26,6 +26,6 @@ app.use((ctx)=>{
   errorHandler(ctx)
 })
 
-app.listen(3000, function () {
+app.listen(port, function () {
   console.log("Server running on https://localhost:3000");
 });
