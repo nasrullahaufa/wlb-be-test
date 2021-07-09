@@ -34,9 +34,9 @@ class Controller {
             return like.dataValues.UserId == checkedUser.id;
           });
           if (isAlreadyLike.length !== 0) {
-              throw{
-                  name :"AlreadyLiked"
-              }
+            throw {
+              name: "AlreadyLiked",
+            };
           } else {
             const newLike = await Like.create({
               PostId,
@@ -67,7 +67,6 @@ class Controller {
             name: "PostNotFound",
           };
         }
-     
       } else {
         throw {
           name: "JsonWebTokenError",

@@ -12,13 +12,15 @@ class Controller {
   static async register(ctx, next) {
     const { email, password } = ctx.request.body;
     console.log(email, password);
+    const token = generateToken({ email: email });
+    console.log(token)
     try {
       const user = await User.create({ email: email, password: password });
       const token = generateToken({ email: user.email });
       const link = `http://localhost:3000/register/verify?token=${token}`;
 
       const emailVerifikasi = {
-        from: "Blogpost <nasrullahaufa@gmail.com>",
+        from: "Blogpost <alafajakam@gmail.com>",
         to: `${user.email}`,
         subject: "Account Verification",
         text: "Verification link: " + link,
@@ -42,6 +44,7 @@ class Controller {
   static async verify(ctx, next) {
     try {
       const { token } = ctx.request.query;
+      console.log(token)
       const decoded = verifyToken(token);
       let user = await User.findOne({ where: { email: decoded.email } });
       if (user) {
